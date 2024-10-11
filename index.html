@@ -13,18 +13,61 @@
   <meta property="og:url" content="https://v2.artclass-site.ml">
   <meta property="og:image" content="assets/artclass-circle.png">
   <meta name="theme-color" content="#000000" data-react-helmet="true">
+  <style>
+    body {
+      background-color: #000;
+      color: #ffa500;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    header {
+      padding: 10px;
+      text-align: center;
+      background-color: #333;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .navLink {
+      color: #ffa500;
+      text-decoration: none;
+      font-size: 1.2em;
+      transition: color 0.3s;
+    }
+
+    .navLink:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 
-<body style="background-color: #1a1a1a; color: #ffa500; font-family: Arial, sans-serif;">
-  <header style="padding: 10px; text-align: center; background-color: #333;">
-    <h1 style="margin: 0; font-size: 2.5em;">Activity Hub</h1>
+<body>
+  <header>
+    <h1>Activity Hub</h1>
   </header>
 
-  <main style="padding: 20px; text-align: center;">
-    <nav style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;">
-      <a id="homeNav" class="pageLink navLink" href="activities.html" style="color: #ffa500;"><i class="fa-solid fa-bicycle"></i> Activities</a>
-      <a id="homeNav" class="pageLink navLink" href="apps.html" style="color: #ffa500;"><i class="fa-solid fa-desktop"></i> Apps</a>
-      <a id="homeNav" class="pageLink" href="utilities.html" style="color: #ffa500;"><i class="fa-solid fa-wrench"></i> Utilities</a>
+  <main>
+    <nav>
+      <a id="homeNav" class="pageLink navLink" href="activities.html"><i class="fa-solid fa-bicycle"></i> Activities</a>
+      <a id="homeNav" class="pageLink navLink" href="apps.html"><i class="fa-solid fa-desktop"></i> Apps</a>
+      <a id="homeNav" class="pageLink navLink" href="utilities.html"><i class="fa-solid fa-wrench"></i> Utilities</a>
     </nav>
   </main>
 </body>
