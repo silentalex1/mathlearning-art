@@ -15,13 +15,14 @@
             font-family: Arial, sans-serif;
             transition: background-color 0.5s ease;
             padding: 20px; /* Added padding to prevent edges touching */
+            position: relative; /* Needed for absolute positioning of theme button */
         }
 
         .calculator {
             background-color: #fff;
             border-radius: 15px;
             padding: 25px;
-            width: 320px; /* Reduced width */
+            width: 300px; /* Adjusted width */
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             transition: box-shadow 0.2s;
         }
@@ -69,8 +70,9 @@
         }
 
         .theme-switcher {
-            margin-top: 15px;
-            text-align: right;
+            position: absolute; /* Position the theme switcher */
+            top: 20px; /* Distance from the top */
+            right: 20px; /* Distance from the right */
         }
 
         select {
@@ -108,6 +110,15 @@
 </head>
 <body>
 
+    <div class="theme-switcher">
+        <label for="themes">Theme:</label>
+        <select id="themes">
+            <option value="default">Default</option>
+            <option value="dark">Dark Mode</option>
+            <!-- More themes can be added here -->
+        </select>
+    </div>
+
     <div class="calculator">
         <div class="display" id="display">0</div>
         <div class="buttons">
@@ -132,15 +143,6 @@
             <button>C</button>
             <button>+</button>
             <button class="equal">=</button>
-        </div>
-
-        <div class="theme-switcher">
-            <label for="themes">Theme:</label>
-            <select id="themes">
-                <option value="default">Default</option>
-                <option value="dark">Dark Mode</option>
-                <!-- More themes can be added here -->
-            </select>
         </div>
     </div>
 
