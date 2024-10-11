@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math helper - Calculator</title>
+    <title>Math - Calculator</title>
     <style>
         body {
             display: flex;
@@ -183,6 +183,8 @@
                 if (key === 'Enter') {
                     if (displayValue === '44') {
                         window.location.href = 'activity.html'; // Navigate to activity.html if 44 is entered
+                    } else if (displayValue === '88') {
+                        window.open('https://www.google.com', '_blank'); // Open Google.com in a new window
                     } else {
                         displayValue = eval(displayValue).toString();
                     }
