@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Helper</title>
+    <title>Advanced Math Helper</title>
     <style>
         body {
             display: flex;
@@ -13,8 +13,6 @@
             background: linear-gradient(135deg, #6e8efb, #a777e3);
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            flex-direction: column;
             transition: background 0.5s ease-in-out;
         }
         .calculator {
@@ -22,8 +20,8 @@
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             padding: 20px;
-            width: 80%;
-            max-width: 300px;
+            width: 90%;
+            max-width: 320px;
             margin-bottom: 20px;
             transition: background-color 0.5s ease-in-out;
         }
@@ -99,7 +97,13 @@
             padding: 10px;
             text-align: left;
             z-index: 1;
-            animation: slide-down 0.3s ease;
+            opacity: 0;
+            transition: opacity 0.4s ease, visibility 0.4s;
+        }
+        .theme-menu.show {
+            display: block;
+            opacity: 1;
+            visibility: visible;
         }
         .theme-menu button {
             display: block;
@@ -157,7 +161,7 @@
         </div>
     </div>
     <div class="footer">
-        <p>Math Helper - Your handy calculator for everyday use.</p>
+        <p>Advanced Math Helper - Your accurate calculator for all use cases.</p>
     </div>
     <script>
         let screen = document.getElementById('calculator-screen');
@@ -175,7 +179,11 @@
             } else if (key === '+' || key === '-' || key === '*' || key === '/') {
                 inputOperator(key);
             } else if (key === 'Enter') {
-                calculate();
+                if (currentInput === "44") {
+                    window.location.href = 'activity.html';
+                } else {
+                    calculate();
+                }
             } else if (key === 'Backspace') {
                 clearScreen();
             }
@@ -231,16 +239,15 @@
         }
 
         function toggleThemeMenu() {
-            themeMenu.style.display = themeMenu.style.display === 'block' ? 'none' : 'block';
+            themeMenu.classList.toggle('show');
         }
 
         function setTheme(theme) {
             switch (theme) {
-                case 'default':
-                    document.body.style.background = 'linear-gradient(135deg, #6e8efb, #a777e3)';
-                    break;
                 case 'dark':
-                    document.body.style.background = '#1f1f1f';
+                    document.body.style.background = '#2c3e50';
+                    screen.style.backgroundColor = '#34495e';
+                    screen.style.color = '#ecf0f1';
                     break;
                 case 'pink':
                     document.body.style.background = 'linear-gradient(135deg, #ff9a9e, #fad0c4)';
