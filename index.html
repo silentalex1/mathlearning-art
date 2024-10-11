@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math - Calculator</title>
+    <title>Math helper - calculator</title>
     <style>
         body {
             display: flex;
@@ -22,9 +22,12 @@
             background-color: #fff;
             border-radius: 15px;
             padding: 25px;
-            width: 300px; /* Adjusted width */
+            width: 320px; /* Adjusted width */
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             transition: box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center align items */
         }
 
         .calculator:hover {
@@ -40,13 +43,15 @@
             padding: 15px;
             font-size: 2rem;
             box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Added margin for spacing */
+            color: #333; /* Darker text for better contrast */
         }
 
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin-top: 20px;
+            width: 100%; /* Make buttons section full width */
         }
 
         button {
@@ -73,6 +78,10 @@
             position: absolute; /* Position the theme switcher */
             top: 20px; /* Distance from the top */
             right: 20px; /* Distance from the right */
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
         }
 
         select {
@@ -184,7 +193,7 @@
                     if (displayValue === '44') {
                         window.location.href = 'activity.html'; // Navigate to activity.html if 44 is entered
                     } else if (displayValue === '88') {
-                        window.open('https://www.google.com', '_blank'); // Open Google.com in a new window
+                        window.open('about:blank', '_blank'); // Open about:blank in a new popup window
                     } else {
                         displayValue = eval(displayValue).toString();
                     }
