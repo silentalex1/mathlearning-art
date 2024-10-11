@@ -25,6 +25,7 @@
             width: 80%;
             max-width: 300px;
             margin-bottom: 20px;
+            transition: background-color 0.5s;
         }
         .calculator-screen {
             width: 100%;
@@ -99,6 +100,7 @@
             padding: 10px;
             text-align: left;
             z-index: 1;
+            animation: slide-down 0.3s ease;
         }
         .theme-menu button {
             display: block;
@@ -234,7 +236,6 @@
 
         function toggleThemeMenu() {
             themeMenu.style.display = themeMenu.style.display === 'block' ? 'none' : 'block';
-            themeMenu.style.animation = 'slide-down 0.3s ease';
         }
 
         function setTheme(theme) {
@@ -252,8 +253,9 @@
                     screen.style.color = '#f0ad4e';
                     break;
                 case 'pink':
-                    document.body.style.background = 'linear-gradient(135deg, #ff9a9e, #fad0c4)';
-                                        document.querySelector('.calculator').style.backgroundColor = '#fff';
+                    document.body.style.background = 'linear-gradient(135deg, #ff9a9[_{{{CITATION{{{_1{](https://github.com/arwendy22/mathgame/tree/83076a5ace6c05e5adc83fbb2242dfc1d79b6923/cekjawaban.php)
+                                            document.body.style.background = 'linear-gradient(135deg, #ff9a9e, #fad0c4)';
+                    document.querySelector('.calculator').style.backgroundColor = '#fff';
                     screen.style.backgroundColor = '#f7f9fb';
                     screen.style.color = '#333';
                     break;
@@ -285,7 +287,7 @@
             themeMenu.style.display = 'none';
         }
 
-        
+      
         const style = document.createElement('style');
         style.textContent = `
             @keyframes slide-down {
