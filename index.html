@@ -19,10 +19,14 @@
       color: #ffa500;
       font-family: Arial, sans-serif;
       margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     header {
-      padding: 10px;
+      width: 100%;
+      padding: 20px;
       text-align: center;
       background-color: #333;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -35,6 +39,8 @@
 
     main {
       padding: 20px;
+      width: 100%;
+      max-width: 800px;
       text-align: center;
     }
 
@@ -49,11 +55,16 @@
       color: #ffa500;
       text-decoration: none;
       font-size: 1.2em;
-      transition: color 0.3s;
+      display: block;
+      padding: 10px;
+      border: 1px solid #ffa500;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     .navLink:hover {
-      color: #fff;
+      background-color: #ffa500;
+      color: #000;
     }
   </style>
 </head>
@@ -65,9 +76,9 @@
 
   <main>
     <nav>
-      <a id="homeNav" class="pageLink navLink" href="activities.html"><i class="fa-solid fa-bicycle"></i> Activities</a>
-      <a id="homeNav" class="pageLink navLink" href="apps.html"><i class="fa-solid fa-desktop"></i> Apps</a>
-      <a id="homeNav" class="pageLink navLink" href="utilities.html"><i class="fa-solid fa-wrench"></i> Utilities</a>
+      <a class="navLink" href="activities.html"><i class="fa-solid fa-bicycle"></i> Activities</a>
+      <a class="navLink" href="apps.html"><i class="fa-solid fa-desktop"></i> Apps</a>
+      <a class="navLink" href="utilities.html"><i class="fa-solid fa-wrench"></i> Utilities</a>
     </nav>
   </main>
 </body>
