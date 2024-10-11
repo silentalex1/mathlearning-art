@@ -122,7 +122,8 @@
         <button onclick="setTheme('dark')">Dark Mode</button>
         <button onclick="setTheme('pink')">Pink Bliss</button>
         <button onclick="setTheme('green')">Green Vibes</button>
-        <!-- Add more themes as desired -->
+        <button onclick="setTheme('blue')">Cool Blue</button>
+        <button onclick="setTheme('earth')">Earth Tones</button>
     </div>
     <div class="calculator">
         <input type="text" class="calculator-screen" id="calculator-screen" disabled />
@@ -252,13 +253,24 @@
                     break;
                 case 'pink':
                     document.body.style.background = 'linear-gradient(135deg, #ff9a9e, #fad0c4)';
+                                        document.querySelector('.calculator').style.backgroundColor = '#fff';
+                    screen.style.backgroundColor = '#f7f9fb';
+                    screen.style.color = '#333';
+                    break;
+                case 'green':
+                    document.body.style.background = 'linear-gradient(135deg, #93bfa4, #e6f4dc)';
                     document.querySelector('.calculator').style.backgroundColor = '#fff';
                     screen.style.backgroundColor = '#f7f9fb';
                     screen.style.color = '#333';
-[_{{{CITATION{{{_1{](https://github.com/buribalazs/smooth-drag-order/tree/7b40d21d076c3e31765f61481f537beaf4c5ec9f/README.md)[_{{{CITATION{{{_2{](https://github.com/arwendy22/mathgame/tree/83076a5ace6c05e5adc83fbb2242dfc1d79b6923/cekjawaban.php)
-                break;
-                case 'green':
-                    document.body.style.background = 'linear-gradient(135deg, #93bfa4, #e6f4dc)';
+                    break;
+                case 'blue':
+                    document.body.style.background = 'linear-gradient(135deg, #a2d4f5, #d8e9f9)';
+                    document.querySelector('.calculator').style.backgroundColor = '#fff';
+                    screen.style.backgroundColor = '#f7f9fb';
+                    screen.style.color = '#333';
+                    break;
+                case 'earth':
+                    document.body.style.background = 'linear-gradient(135deg, #c2b280, #e4d9c9)';
                     document.querySelector('.calculator').style.backgroundColor = '#fff';
                     screen.style.backgroundColor = '#f7f9fb';
                     screen.style.color = '#333';
@@ -273,7 +285,7 @@
             themeMenu.style.display = 'none';
         }
 
-        
+        // Add smooth dropdown animation
         const style = document.createElement('style');
         style.textContent = `
             @keyframes slide-down {
