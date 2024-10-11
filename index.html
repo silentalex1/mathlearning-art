@@ -79,11 +79,6 @@
             font-size: 1rem;
         }
 
-        /* Keyboard input styles */
-        input:focus {
-            outline: none;
-        }
-
         /* Theme specific styles */
         .dark-theme {
             background: #333;
@@ -108,8 +103,6 @@
         .dark-theme button:hover {
             background-color: #888;
         }
-
-        /* More theme styles... */
     </style>
 </head>
 <body>
@@ -145,7 +138,7 @@
             <select id="themes">
                 <option value="default">Default</option>
                 <option value="dark">Dark Mode</option>
-                <!-- Add more themes here -->
+                <!-- More themes can be added here -->
             </select>
         </div>
     </div>
@@ -185,7 +178,11 @@
             const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '+', '-', '*', '/', 'Enter', 'Escape', '(', ')'];
             if (allowedKeys.includes(key)) {
                 if (key === 'Enter') {
-                    displayValue = eval(displayValue).toString();
+                    if (displayValue === '44') {
+                        window.location.href = 'activity.html'; // Navigate to activity.html if 44 is entered
+                    } else {
+                        displayValue = eval(displayValue).toString();
+                    }
                 } else if (key === 'Escape') {
                     displayValue = '0';
                 } else {
