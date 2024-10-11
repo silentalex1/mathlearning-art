@@ -24,4 +24,62 @@
       flex: 1;
       width: 100%;
       display: flex;
-      flex
+      flex-direction: column;
+      align-items: center;
+    }
+
+    iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+    }
+
+    .activityLink {
+      color: #ffa500;
+      text-decoration: none;
+      font-size: 1.2em;
+      margin: 10px 0;
+      display: inline-block;
+    }
+
+    .activityLink i {
+      margin-right: 5px;
+    }
+
+    #usercounter iframe {
+      border: none;
+      width: 800px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <iframe src="https://sobloxsy.github.io/idle-breakout/"></iframe>
+    <p>
+      <a class="activityLink" href="../games.html"><i class="fa-solid fa-arrow-left"></i> Back</a> | 
+      <a class="activityLink" href="../index.html"><i class="fa-solid fa-house"></i> Home</a>
+    </p>
+    <script 
+      src="https://giscus.app/client.js"
+      data-repo="proudparrot2/artclass"
+      data-repo-id="R_kgDOILyPKQ"
+      data-category="Game Comments"
+      data-category-id="DIC_kwDOILyPKc4CSKum"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="dark"
+      data-lang="en"
+      crossorigin="anonymous"
+      async>
+    </script>
+    <div id="usercounter">
+      <iframe src="https://php-web-server.parrotdev.repl.co"></iframe>
+    </div>
+  </main>
+</body>
+</html>
