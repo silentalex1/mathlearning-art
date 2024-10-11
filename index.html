@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Helper - Accurate Calculator</title>
+    <title>Math helper - Calculator</title>
     <style>
         body {
             display: flex;
@@ -13,74 +13,103 @@
             margin: 0;
             background: linear-gradient(135deg, #7f8cfa, #a17fe0);
             font-family: Arial, sans-serif;
+            transition: background-color 0.5s ease;
         }
 
         .calculator {
             background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 340px;
+            border-radius: 15px;
+            padding: 25px;
+            width: 360px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.2s;
+        }
+
+        .calculator:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
         .display {
-            background-color: #f1f1f1;
             width: 100%;
-            height: 60px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            padding: 10px;
-            font-size: 1.8rem;
+            height: 70px;
+            background: #f0f0f0;
+            border-radius: 10px;
             text-align: right;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            font-size: 2rem;
+            box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .buttons {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
+            margin-top: 20px;
         }
 
-        .buttons button {
+        button {
+            padding: 20px;
+            font-size: 1.5rem;
             background-color: #ffa726;
             border: none;
-            border-radius: 5px;
-            padding: 20px;
-            font-size: 1.2rem;
+            border-radius: 10px;
             color: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .buttons button:hover {
+        button:hover {
             background-color: #fb8c00;
+            transform: scale(1.05);
         }
 
-        .buttons .equal {
-            background-color: #42a5f5;
-        }
-
-        .buttons .equal:hover {
-            background-color: #1e88e5;
-        }
-
-        .buttons .clear, .buttons .sqrt, .buttons .pow {
-            background-color: #e53935;
-        }
-
-        .buttons .clear:hover {
-            background-color: #d32f2f;
-        }
-
-        .buttons .sqrt:hover, .buttons .pow:hover {
-            background-color: #d32f2f;
+        button:active {
+            transform: scale(0.95);
         }
 
         .theme-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            margin-top: 15px;
+            text-align: right;
         }
+
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        /* Keyboard input styles */
+        input:focus {
+            outline: none;
+        }
+
+        /* Theme specific styles */
+        .dark-theme {
+            background: #333;
+            color: #fff;
+        }
+
+        .dark-theme .calculator {
+            background-color: #444;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .dark-theme .display {
+            background: #555;
+            color: #fff;
+        }
+
+        .dark-theme button {
+            background-color: #666;
+            color: #fff;
+        }
+
+        .dark-theme button:hover {
+            background-color: #888;
+        }
+
+        /* More theme styles... */
     </style>
 </head>
 <body>
@@ -90,79 +119,91 @@
         <div class="buttons">
             <button>(</button>
             <button>)</button>
-            <button class="sqrt">√</button>
-            <button class="pow">x²</button>
-            <button class="clear">C</button>
+            <button>√</button>
+            <button>%</button>
             <button>7</button>
             <button>8</button>
             <button>9</button>
             <button>/</button>
-            <button>%</button>
             <button>4</button>
             <button>5</button>
             <button>6</button>
             <button>*</button>
-            <button>M+</button>
             <button>1</button>
             <button>2</button>
             <button>3</button>
             <button>-</button>
-            <button>M-</button>
             <button>0</button>
             <button>.</button>
-            <button class="equal">=</button>
+            <button>C</button>
             <button>+</button>
-            <button>MR</button>
+            <button class="equal">=</button>
         </div>
-    </div>
 
-    <div class="theme-switcher">
-        <button id="theme-btn">Themes</button>
+        <div class="theme-switcher">
+            <label for="themes">Theme:</label>
+            <select id="themes">
+                <option value="default">Default</option>
+                <option value="dark">Dark Mode</option>
+                <!-- Add more themes here -->
+            </select>
+        </div>
     </div>
 
     <script>
         const display = document.getElementById('display');
-        const buttons = Array.from(document.querySelectorAll('.buttons button'));
-        let memory = 0;
+        const buttons = document.querySelectorAll('.buttons button');
+        let displayValue = '0';
 
-        buttons.map(button => {
-            button.addEventListener('click', (e) => {
-                const input = e.target.innerText;
-                if (input === 'C') {
-                    display.innerText = '0';
-                } else if (input === '=') {
+        function updateDisplay() {
+            display.innerText = displayValue;
+        }
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const value = button.innerText;
+                if (value === 'C') {
+                    displayValue = '0';
+                } else if (value === '=') {
                     try {
-                        display.innerText = eval(display.innerText.replace('√', 'Math.sqrt').replace('x²', '**2'));
-                    } catch {
-                        display.innerText = 'Error';
+                        displayValue = eval(displayValue).toString();
+                    } catch (error) {
+                        displayValue = 'Error';
                     }
-                } else if (input === '√') {
-                    display.innerText += '√';
-                } else if (input === 'x²') {
-                    display.innerText += '**2';
-                } else if (input === 'M+') {
-                    memory += parseFloat(display.innerText);
-                } else if (input === 'M-') {
-                    memory -= parseFloat(display.innerText);
-                } else if (input === 'MR') {
-                    display.innerText = memory.toString();
+                } else if (value === '√') {
+                    displayValue = Math.sqrt(parseFloat(displayValue)).toString();
                 } else {
-                    if (display.innerText === '0') {
-                        display.innerText = input;
-                    } else {
-                        display.innerText += input;
-                    }
+                    displayValue = displayValue === '0' ? value : displayValue + value;
                 }
+                updateDisplay();
             });
         });
 
-        const themeBtn = document.getElementById('theme-btn');
-        let isDarkMode = false;
-        
-        themeBtn.addEventListener('click', () => {
-            isDarkMode = !isDarkMode;
-            document.body.style.background = isDarkMode ? '#333' : 'linear-gradient(135deg, #7f8cfa, #a17fe0)';
-            document.body.style.color = isDarkMode ? '#fff' : '#000';
+        // Keyboard input functionality
+        document.addEventListener('keydown', (event) => {
+            const key = event.key;
+            const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '+', '-', '*', '/', 'Enter', 'Escape', '(', ')'];
+            if (allowedKeys.includes(key)) {
+                if (key === 'Enter') {
+                    displayValue = eval(displayValue).toString();
+                } else if (key === 'Escape') {
+                    displayValue = '0';
+                } else {
+                    displayValue = displayValue === '0' ? key : displayValue + key;
+                }
+                updateDisplay();
+            }
+        });
+
+        // Theme switching functionality
+        const themeSelect = document.getElementById('themes');
+        themeSelect.addEventListener('change', (e) => {
+            const selectedTheme = e.target.value;
+            if (selectedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+            } else {
+                document.body.classList.remove('dark-theme');
+            }
         });
     </script>
 </body>
