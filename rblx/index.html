@@ -26,7 +26,7 @@
         .embed-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
         }
         .embed-container iframe {
             position: absolute;
@@ -47,6 +47,18 @@
     </div>
 
     <script>
+        function changeUserAgent() {
+            const iframe = document.getElementById('embedFrame');
+            const originalSrc = iframe.src;
+            let maskedUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36";
+            let newIframeUrl = `data:text/html,<html><head><script>navigator.__defineGetter__('userAgent', function(){return '${maskedUserAgent}';});</script></head><body><iframe src='${originalSrc}'></iframe></body></html>`;
+            iframe.src = newIframeUrl;
+        }
+
+        document.getElementById('embedFrame').onload = function() {
+            changeUserAgent();
+        };
+
         function goBack() {
             window.location.href = 'activity.html';
         }
@@ -59,7 +71,7 @@
                 });
             } else {
                 document.exitFullscreen();
-                embedFrame.src = "another-website.html"; // Change to another website URL
+                embedFrame.src = "another-website.html";
             }
         }
     </script>
