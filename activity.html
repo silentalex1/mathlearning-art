@@ -3,101 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activities Page</title>
+    <title>Math Help - Activities</title>
     <style>
         body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #333;
+            color: #eee;
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f4f8;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
         }
-
-        header {
+        .navbar {
             width: 100%;
-            padding: 20px;
-            background-color: #2c3e50;
-            color: #fff;
+            background-color: #000;
+            padding: 1em;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 28px;
+            font-weight: bold;
         }
-
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            font-weight: 300;
+        .search-container {
+            margin: 20px;
+            width: 80%;
+            display: flex;
+            justify-content: center;
         }
-
         .search-bar {
-            margin: 30px 0;
             width: 100%;
-            max-width: 500px;
-            padding: 15px;
-            border-radius: 8px;
+            max-width: 400px;
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #555;
+            border-radius: 5px;
+        }
+        .buttons-container {
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .button {
+            padding: 15px 25px;
+            font-size: 16px;
+            background-color: #555;
+            color: #eee;
             border: none;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-
-        .activities-list {
-            width: 100%;
-            max-width: 800px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .activity-item {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 1.5rem;
-            color: #333;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .activity-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        .button:hover {
+            background-color: #777;
         }
     </style>
 </head>
 <body>
+    <div class="navbar">
+        Math help - activities
+    </div>
+    <div class="search-container">
+        <input type="text" class="search-bar" id="searchInput" placeholder="search for activities">
+    </div>
+    <div class="buttons-container" id="buttonsContainer">
+        <button class="button" onclick="location.href='/1v1lol'">1v1.lol</button>
+        <button class="button" onclick="location.href='/MC'">MC</button>
+        <button class="button" onclick="location.href='/RetroBowl'">Retro Bowl</button>
+        <button class="button" onclick="location.href='/ShellShockers'">Shell Shockers</button>
+    </div>
 
-<header>
-    <h1>Activities</h1>
-</header>
-
-<input type="text" placeholder="Search for activities..." id="search-bar" class="search-bar">
-
-<div class="activities-list" id="activities-list">
-    <div class="activity-item">Activity 1</div>
-    <div class="activity-item">Activity 2</div>
-    <div class="activity-item">Activity 3</div>
-    <div class="activity-item">Activity 4</div>
-    <div class="activity-item">Activity 5</div>
-</div>
-
-<script>
-    // Search Functionality
-    document.getElementById('search-bar').addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
-        const activityItems = document.querySelectorAll('.activity-item');
-        activityItems.forEach(function(item) {
-            if (item.textContent.toLowerCase().includes(searchTerm)) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            var filter = this.value.toUpperCase();
+            var buttons = document.getElementById('buttonsContainer').getElementsByTagName('button');
+            for (var i = 0; i < buttons.length; i++) {
+                var button = buttons[i];
+                var text = button.textContent || button.innerText;
+                if (text.toUpperCase().indexOf(filter) > -1) {
+                    button.style.display = "";
+                } else {
+                    button.style.display = "none";
+                }
             }
         });
-    });
-</script>
-
+    </script>
 </body>
 </html>
