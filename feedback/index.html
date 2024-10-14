@@ -6,29 +6,55 @@
     <title>Feedback Activities</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
         }
         .navbar {
-            background-color: black;
+            background-color: #333;
             color: white;
             padding: 15px;
+            width: 100%;
             text-align: center;
-            font-size: 20px;
+            font-size: 24px;
         }
         .container {
-            margin: 20px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
         }
         .feedback-box {
             display: flex;
             align-items: center;
+            justify-content: center;
+            margin-top: 20px;
         }
         .feedback-box input[type="text"] {
             width: 300px;
             padding: 10px;
             margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
         .feedback-box button {
             padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .feedback-box button:hover {
+            background-color: #555;
         }
     </style>
 </head>
@@ -37,10 +63,32 @@
         Feedback Activities
     </div>
     <div class="container">
+        <h2>We'd Love Your Feedback!</h2>
         <div class="feedback-box">
-            <input type="text" placeholder="Give me games suggestions.">
-            <button type="submit">Submit</button>
+            <input type="text" id="feedback" placeholder="Give me games suggestions.">
+            <button type="submit" onclick="sendFeedback()">Submit</button>
         </div>
     </div>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("YOUR_USER_ID");
+        })();
+
+        function sendFeedback() {
+            var feedback = document.getElementById("feedback").value;
+            var templateParams = {
+                feedback: feedback
+            };
+
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    alert('SUCCESS!', response.status, response.text);
+                }, function(error) {
+                    alert('FAILED...', error);
+                });
+        }
+    </script>
 </body>
 </html>
