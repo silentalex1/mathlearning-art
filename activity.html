@@ -28,6 +28,7 @@
             width: 80%;
             display: flex;
             justify-content: center;
+            align-items: center;
         }
         .search-bar {
             width: 100%;
@@ -38,6 +39,21 @@
             border-radius: 5px;
             background-color: #444;
             color: #eee;
+            margin-right: 10px;
+        }
+        .feedback-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #555;
+            color: #eee;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .feedback-button:hover {
+            background-color: #777;
+            transform: scale(1.05);
         }
         .buttons-container {
             width: 80%;
@@ -68,6 +84,7 @@
     </div>
     <div class="search-container">
         <input type="text" class="search-bar" id="searchInput" placeholder="search for activities">
+        <button class="feedback-button" onclick="location.href='/feedback'">Feedback</button>
     </div>
     <div class="buttons-container" id="buttonsContainer">
         <button class="button" onclick="location.href='/1v1lol'">1v1.lol</button>
