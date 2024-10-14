@@ -63,7 +63,7 @@
         Feedback Activities
     </div>
     <div class="container">
-        <h2>We'd Love Your Feedback!</h2>
+        <h2>Give me suggestions as we'd love some.</h2>
         <div class="feedback-box">
             <input type="text" id="feedback" placeholder="Give me games suggestions.">
             <button type="submit" onclick="sendFeedback()">Submit</button>
@@ -73,7 +73,7 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         (function(){
-            emailjs.init("YOUR_USER_ID");
+            emailjs.init("WFRtvFx7Hqn23uMFWiF5B");
         })();
 
         function sendFeedback() {
@@ -82,7 +82,7 @@
                 feedback: feedback
             };
 
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            emailjs.send('service_jdmstdk', 'YOUR_TEMPLATE_ID', templateParams)
                 .then(function(response) {
                     alert('SUCCESS!', response.status, response.text);
                 }, function(error) {
