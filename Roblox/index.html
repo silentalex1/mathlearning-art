@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rblx</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            background-color: #333;
+            padding: 10px;
+        }
+        .navbar button {
+            color: white;
+            background-color: #444;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .embed-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+        }
+        .embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <button onclick="goBack()">Go Back</button>
+        <button onclick="toggleFullscreen()">Fullscreen</button>
+    </div>
+    <div class="embed-container">
+        <iframe id="embedFrame" src="https://ngg.frogiee.one/" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        function changeUserAgent() {
+            const iframe = document.getElementById('embedFrame');
+            const originalSrc = iframe.src;
+            let maskedUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36";
+            let newIframeUrl = `data:text/html,<html><head><script>navigator.__defineGetter__('userAgent', function(){return '${maskedUserAgent}';});</script></head><body><iframe src='${originalSrc}'></iframe></body></html>`;
+            iframe.src = newIframeUrl;
+        }
+
+        document.getElementById('embedFrame').onload = function() {
+            changeUserAgent();
+        };
+
+        function goBack() {
+            window.location.href = 'activity.html';
+        }
+
+        function toggleFullscreen() {
+            let embedFrame = document.getElementById('embedFrame');
+            if (!document.fullscreenElement) {
+                embedFrame.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen();
+                embedFrame.src = "https://ngg.frogiee.one/";
+            }
+        }
+    </script>
+</body>
+</html>
