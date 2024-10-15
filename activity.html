@@ -55,6 +55,21 @@
             background-color: #777;
             transform: scale(1.05);
         }
+        .open-blink-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #555;
+            color: #eee;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-left: 20px; /* Moves the button more to the side */
+        }
+        .open-blink-button:hover {
+            background-color: #777;
+            transform: scale(1.05);
+        }
         .buttons-container {
             width: 80%;
             display: flex;
@@ -85,14 +100,16 @@
     <div class="search-container">
         <input type="text" class="search-bar" id="searchInput" placeholder="search for activities">
         <button class="feedback-button" onclick="location.href='/feedback'">Feedback</button>
+        <!-- New button adjusted to move to the side -->
+        <button class="open-blink-button" onclick="clickHandler('https://mathlearning.art/activity.html')">Open in about:blink</button>
     </div>
     <div class="buttons-container" id="buttonsContainer">
-        <button class="button" onclick="location.href='/1v1lol'">1v1.lol</button>
-        <button class="button" onclick="location.href='/MC'">MC</button>
-        <button class="button" onclick="location.href='/RetroBowl'">Retro Bowl</button>
-        <button class="button" onclick="location.href='/ss'">Shell Shockers</button>
-        <button class="button" onclick="location.href='/Roblox'">Roblox</button>
-        <button class="button" onclick="location.href='/driftboss'">Drift Boss</button>
+        <button class="button" onclick="clickHandler('/1v1lol')">1v1.lol</button>
+        <button class="button" onclick="clickHandler('/MC')">MC</button>
+        <button class="button" onclick="clickHandler('/RetroBowl')">Retro Bowl</button>
+        <button class="button" onclick="clickHandler('/ss')">Shell Shockers</button>
+        <button class="button" onclick="clickHandler('/Roblox')">Roblox</button>
+        <button class="button" onclick="clickHandler('/driftboss')">Drift Boss</button>
     </div>
 
     <script>
@@ -109,6 +126,14 @@
                 }
             }
         });
+
+        function clickHandler(url) {
+            var win = window.open();
+            var iframe = win.document.createElement('iframe');
+            iframe.style = "position:fixed;width:100vw;height:100vh;top:0px;left:0px;right:0px;bottom:0px;z-index:2147483647;background-color:white;border:none;";
+            iframe.src = url;
+            win.document.body.appendChild(iframe);
+        }
     </script>
 </body>
 </html>
