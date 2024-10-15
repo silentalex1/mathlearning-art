@@ -13,6 +13,7 @@
         .navbar {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             background-color: #333;
             padding: 10px;
         }
@@ -38,31 +39,38 @@
     </style>
 </head>
 <body>
+
+    <!-- Navigation bar -->
     <div class="navbar">
         <button onclick="goBack()">Go Back</button>
+        <button onclick="openInAboutBlink()">Open in About:blink</button>
         <button onclick="toggleFullscreen()">Fullscreen</button>
     </div>
+
+    <!-- Embed Container -->
     <div class="embed-container">
         <iframe id="embedFrame" src="https://humanorganising.org" frameborder="0"></iframe>
     </div>
 
     <script>
-        function changeUserAgent() {
-            const iframe = document.getElementById('embedFrame');
-            const originalSrc = iframe.src;
-            let maskedUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36";
-            let newIframeUrl = `data:text/html,<html><head><script>navigator.__defineGetter__('userAgent', function(){return '${maskedUserAgent}';});</script></head><body><iframe src='${originalSrc}'></iframe></body></html>`;
-            iframe.src = newIframeUrl;
+        // Opens the website in an iframe and shows 'about:blink' in the address bar
+        function openInAboutBlink() {
+            var win = window.open(); 
+            var iframe = win.document.createElement('iframe'); 
+            iframe.style = "position:fixed;width:100vw;height:100vh;top:0px;left:0px;right:0px;bottom:0px;z-index:2147483647;background-color:white;border:none;";
+            iframe.src = "https://mathlearning.art/ss/"; // Your desired URL
+            win.document.body.appendChild(iframe);
+            
+            // Change the visible URL in the address bar to 'about:blink'
+            win.history.pushState({}, '', 'about:blink');
         }
 
-        document.getElementById('embedFrame').onload = function() {
-            changeUserAgent();
-        };
-
+        // Go Back button functionality
         function goBack() {
             window.location.href = 'activity.html';
         }
 
+        // Toggle Fullscreen
         function toggleFullscreen() {
             let embedFrame = document.getElementById('embedFrame');
             if (!document.fullscreenElement) {
@@ -75,5 +83,6 @@
             }
         }
     </script>
+
 </body>
 </html>
