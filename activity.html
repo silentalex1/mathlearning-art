@@ -64,7 +64,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
-            margin-left: 20px; /* Moves the button more to the side */
+            margin-left: 20px;
         }
         .open-blink-button:hover {
             background-color: #777;
@@ -95,12 +95,11 @@
 </head>
 <body>
     <div class="navbar">
-        Math help - activities
+        Math Help - Activities
     </div>
     <div class="search-container">
         <input type="text" class="search-bar" id="searchInput" placeholder="search for activities">
         <button class="feedback-button" onclick="location.href='/feedback'">Feedback</button>
-        <!-- New button adjusted to move to the side -->
         <button class="open-blink-button" onclick="clickHandler('https://mathlearning.art/activity.html')">Open in about:blink</button>
     </div>
     <div class="buttons-container" id="buttonsContainer">
@@ -110,6 +109,8 @@
         <button class="button" onclick="location.href='/shellshocker'">Shell Shockers</button>
         <button class="button" onclick="location.href='/Roblox'">Roblox</button>
         <button class="button" onclick="location.href='/driftboss'">Drift Boss</button>
+        <!-- New "Slope" button -->
+        <button class="button" onclick="location.href='/slope'">Slope</button>
     </div>
 
     <script>
@@ -127,7 +128,6 @@
             }
         });
 
-        // This function only applies to the "Open in about:blink" button
         function clickHandler(url) {
             var win = window.open();
             var iframe = win.document.createElement('iframe');
