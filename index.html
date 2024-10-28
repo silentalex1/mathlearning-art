@@ -48,6 +48,13 @@
             outline: none;
         }
 
+        /* Button container */
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
         /* Button styling */
         .button {
             width: 22%;
@@ -82,6 +89,7 @@
         .button.equals {
             background: #2ecc71;
             color: #fff;
+            width: 48%;
         }
 
         .button.equals:hover {
@@ -90,6 +98,7 @@
 
         .button.clear {
             background: #e74c3c;
+            width: 48%;
         }
 
         .button.clear:hover {
@@ -101,9 +110,8 @@
 <body>
     <div id="calculator">
         <input type="text" id="display" disabled />
-        <div>
+        <div class="button-container">
             <button class="button clear" onclick="clearDisplay()">C</button>
-            <button class="button" onclick="appendToDisplay('%')">%</button>
             <button class="button operator" onclick="appendToDisplay('/')">÷</button>
             <button class="button operator" onclick="appendToDisplay('*')">×</button>
             <button class="button" onclick="appendToDisplay('7')">7</button>
@@ -142,12 +150,15 @@
         }
 
         document.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                if (display.value === "44") {
-                    window.location.href = "activity.html";
-                } else {
-                    calculateResult();
-                }
+            const key = event.key;
+            if (!isNaN(key) || ['+', '-', '*', '/', '.'].includes(key)) {
+                appendToDisplay(key);
+            } else if (key === "Enter") {
+                calculateResult();
+            } else if (key === "Backspace") {
+                display.value = display.value.slice(0, -1);
+            } else if (key === "Escape") {
+                clearDisplay();
             }
         });
     </script>
