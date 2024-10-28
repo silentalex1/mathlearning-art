@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,80 +20,84 @@
             justify-content: center;
             height: 100vh;
             background-color: #121212;
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             color: #e0e0e0;
         }
 
         /* Calculator container */
         #calculator {
-            width: 320px;
-            padding: 20px;
+            width: 380px;
+            padding: 30px;
             background: #1f1f1f;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
         }
 
         /* Display screen */
         #display {
             width: 100%;
-            height: 60px;
+            height: 75px;
             background: #333;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             text-align: right;
-            padding: 15px;
+            padding: 20px;
             color: #fff;
-            font-size: 24px;
-            margin-bottom: 15px;
+            font-size: 28px;
+            margin-bottom: 20px;
             outline: none;
         }
 
         /* Button styling */
         .button {
-            width: 23%;
-            height: 60px;
-            margin: 1%;
-            font-size: 20px;
+            width: 22%;
+            height: 65px;
+            margin: 2%;
+            font-size: 22px;
             color: #e0e0e0;
             background: #3a3a3a;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.3s, transform 0.2s;
         }
 
-        /* Hover effect for buttons */
         .button:hover {
             background: #555;
+            transform: translateY(-3px);
         }
 
-        /* Operator and special buttons styling */
+        .button:active {
+            transform: translateY(0);
+        }
+
         .button.operator {
-            background: #fb8c00;
+            background: #f39c12;
         }
 
         .button.operator:hover {
-            background: #ef6c00;
+            background: #e67e22;
         }
 
         .button.equals {
-            background: #43a047;
+            background: #2ecc71;
             color: #fff;
         }
 
         .button.equals:hover {
-            background: #388e3c;
+            background: #27ae60;
         }
 
         .button.clear {
-            background: #e53935;
+            background: #e74c3c;
         }
 
         .button.clear:hover {
-            background: #d32f2f;
+            background: #c0392b;
         }
     </style>
 </head>
+
 <body>
     <div id="calculator">
         <input type="text" id="display" disabled />
@@ -101,41 +106,33 @@
             <button class="button" onclick="appendToDisplay('%')">%</button>
             <button class="button operator" onclick="appendToDisplay('/')">÷</button>
             <button class="button operator" onclick="appendToDisplay('*')">×</button>
-
             <button class="button" onclick="appendToDisplay('7')">7</button>
             <button class="button" onclick="appendToDisplay('8')">8</button>
             <button class="button" onclick="appendToDisplay('9')">9</button>
             <button class="button operator" onclick="appendToDisplay('-')">−</button>
-
             <button class="button" onclick="appendToDisplay('4')">4</button>
             <button class="button" onclick="appendToDisplay('5')">5</button>
             <button class="button" onclick="appendToDisplay('6')">6</button>
             <button class="button operator" onclick="appendToDisplay('+')">+</button>
-
             <button class="button" onclick="appendToDisplay('1')">1</button>
             <button class="button" onclick="appendToDisplay('2')">2</button>
             <button class="button" onclick="appendToDisplay('3')">3</button>
             <button class="button equals" onclick="calculateResult()">=</button>
-
             <button class="button" onclick="appendToDisplay('0')">0</button>
             <button class="button" onclick="appendToDisplay('.')">.</button>
         </div>
     </div>
-
     <script>
         const display = document.getElementById("display");
 
-        // Append number or operator to the display
         function appendToDisplay(value) {
             display.value += value;
         }
 
-        // Clear the display
         function clearDisplay() {
             display.value = "";
         }
 
-        // Calculate result
         function calculateResult() {
             try {
                 display.value = eval(display.value);
@@ -144,7 +141,6 @@
             }
         }
 
-        // Redirect to activity.html if "44" is entered and Enter is pressed
         document.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
                 if (display.value === "44") {
@@ -156,4 +152,5 @@
         });
     </script>
 </body>
+
 </html>
