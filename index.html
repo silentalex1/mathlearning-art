@@ -153,6 +153,10 @@
             if (input.includes("sqrt")) {
                 return evaluateAdvancedMath(input);
             }
+            if (input === "44") {
+                window.location.href = "activity.html";
+                return;
+            }
             if (input === "help") {
                 return "I'm here to assist you with math calculations. Use basic operators (+, -, *, /) or try 'sqrt' for square root.";
             }
