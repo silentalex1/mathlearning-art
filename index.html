@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathHelper</title>
+    <title>MathHelper AI</title>
     <style>
         /* Basic reset */
         * {
@@ -12,7 +11,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         /* Body styling for dark mode */
         body {
             display: flex;
@@ -23,7 +21,6 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             color: #e0e0e0;
         }
-
         /* Calculator container */
         #calculator {
             width: 320px;
@@ -32,7 +29,6 @@
             border-radius: 20px;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
         }
-
         /* Display screen */
         #display {
             width: 100%;
@@ -47,14 +43,12 @@
             margin-bottom: 20px;
             outline: none;
         }
-
         /* Button container */
         .button-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
         }
-
         /* Button styling */
         .button {
             width: 22%;
@@ -68,48 +62,39 @@
             cursor: pointer;
             transition: background 0.3s, transform 0.2s;
         }
-
         .button:hover {
             background: #555;
             transform: translateY(-3px);
         }
-
         .button:active {
             transform: translateY(0);
         }
-
         .button.operator {
             background: #f39c12;
         }
-
         .button.operator:hover {
             background: #e67e22;
         }
-
         .button.equals {
             background: #2ecc71;
             color: #fff;
             width: 48%;
         }
-
         .button.equals:hover {
             background: #27ae60;
         }
-
         .button.clear {
             background: #e74c3c;
             width: 48%;
         }
-
         .button.clear:hover {
             background: #c0392b;
         }
     </style>
 </head>
-
 <body>
     <div id="calculator">
-        <input type="text" id="display" disabled />
+        <input type="text" id="display" />
         <div class="button-container">
             <button class="button clear" onclick="clearDisplay()">C</button>
             <button class="button operator" onclick="appendToDisplay('/')">÷</button>
@@ -143,29 +128,63 @@
 
         function calculateResult() {
             try {
-                display.value = eval(display.value);
+                const result = evaluateInput(display.value);
+                display.value = result;
             } catch {
                 display.value = "Error";
             }
         }
 
+        // Function to evaluate an advanced math expression
+        function evaluateAdvancedMath(expression) {
+            try {
+                if (expression.includes("sqrt")) {
+                    return Math.sqrt(parseFloat(expression.replace("sqrt", "")));
+                }
+                return eval(expression);
+            } catch {
+                return "Error";
+            }
+        }
+
+        // AI to interpret and calculate advanced expressions and answer questions
+        function evaluateInput(input) {
+            input = input.toLowerCase().trim();
+            if (input.includes("sqrt")) {
+                return evaluateAdvancedMath(input);
+            }
+            if (input === "help") {
+                return "I'm here to assist you with math calculations. Use basic operators (+, -, *, /) or try 'sqrt' for square root.";
+            }
+            if (input === "hello") {
+                return "Hello! How can I assist you today?";
+            }
+            try {
+                return eval(input);
+            } catch {
+                return "Invalid input";
+            }
+        }
+
         document.addEventListener("keydown", (event) => {
             const key = event.key;
-            if (!isNaN(key) || ['+', '-', '*', '/', '.'].includes(key)) {
+            if (!isNaN(key) || ['+', '-', '*', '/', '.', 'sqrt'].includes(key)) {
                 appendToDisplay(key);
             } else if (key === "Enter") {
-                if (display.value === "44") {
-                    window.location.href = "activity.html";
-                } else {
-                    calculateResult();
-                }
+                calculateResult();
             } else if (key === "Backspace") {
                 display.value = display.value.slice(0, -1);
             } else if (key === "Escape") {
                 clearDisplay();
             }
         });
+
+        document.getElementById("display").addEventListener("input", (event) => {
+            const input = event.target.value.toLowerCase();
+            if (input === "help" || input === "hello") {
+                alert(evaluateInput(input));
+            }
+        });
     </script>
 </body>
-
 </html>
