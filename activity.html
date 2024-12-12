@@ -41,21 +41,7 @@
             color: #eee;
             margin-right: 10px;
         }
-        .feedback-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #555;
-            color: #eee;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .feedback-button:hover {
-            background-color: #777;
-            transform: scale(1.05);
-        }
-        .open-blink-button {
+        .feedback-button, .open-blink-button, .helper-button {
             padding: 10px 20px;
             font-size: 16px;
             background-color: #555;
@@ -66,7 +52,7 @@
             transition: background-color 0.3s, transform 0.3s;
             margin-left: 20px;
         }
-        .open-blink-button:hover {
+        .feedback-button:hover, .open-blink-button:hover, .helper-button:hover {
             background-color: #777;
             transform: scale(1.05);
         }
@@ -91,6 +77,38 @@
             background-color: #777;
             transform: scale(1.05);
         }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2147483647;
+        }
+        .overlay-content {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            max-width: 500px;
+            width: 100%;
+            color: #eee;
+        }
+        .overlay-content .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #555;
+            border: none;
+            padding: 5px;
+            color: #eee;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -101,6 +119,7 @@
         <input type="text" class="search-bar" id="searchInput" placeholder="search for activities">
         <button class="feedback-button" onclick="location.href='/feedback'">Feedback</button>
         <button class="open-blink-button" onclick="clickHandler('https://mathlearning.art/activity.html')">Open in about:blink</button>
+        <button class="helper-button" onclick="openHelperWindow()">The wall of helpers</button>
     </div>
     <div class="buttons-container" id="buttonsContainer">
         <button class="button" onclick="location.href='/1v1lol'">1v1.lol</button>
@@ -112,7 +131,13 @@
         <!-- New "Slope" button -->
         <button class="button" onclick="location.href='/slope'">Slope</button>
     </div>
-
+    <div class="overlay" id="helperOverlay">
+        <div class="overlay-content">
+            <button class="close-button" onclick="closeHelperWindow()">X</button>
+            <h2>The Helpers</h2>
+            <p>Angelikah - helped give out ideas onto the website, and helped given links for more games to the website much respect.</p>
+        </div>
+    </div>
     <script>
         document.getElementById('searchInput').addEventListener('input', function() {
             var filter = this.value.toUpperCase();
@@ -134,6 +159,14 @@
             iframe.style = "position:fixed;width:100vw;height:100vh;top:0px;left:0px;right:0px;bottom:0px;z-index:2147483647;background-color:white;border:none;";
             iframe.src = url;
             win.document.body.appendChild(iframe);
+        }
+
+        function openHelperWindow() {
+            document.getElementById('helperOverlay').style.display = 'flex';
+        }
+
+        function closeHelperWindow() {
+            document.getElementById('helperOverlay').style.display = 'none';
         }
     </script>
 </body>
