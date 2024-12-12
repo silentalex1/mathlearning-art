@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(to bottom, #000000, #3b3b3b);
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
             color: #eee;
             margin: 0;
             padding: 0;
@@ -18,7 +18,7 @@
         }
         .navbar {
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: #3b3b98;
             padding: 1em;
             text-align: center;
             font-size: 28px;
@@ -48,7 +48,7 @@
         .feedback-button, .open-blink-button, .helper-button {
             padding: 10px 20px;
             font-size: 16px;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: #3b3b98;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -58,7 +58,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .feedback-button:hover, .open-blink-button:hover, .helper-button:hover {
-            background-color: rgba(255, 0, 0, 0.5);
+            background-color: #5a5ac4;
             transform: scale(1.05);
         }
         .buttons-container {
@@ -71,7 +71,7 @@
         .button {
             padding: 15px 25px;
             font-size: 16px;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: #3b3b98;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -80,7 +80,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .button:hover {
-            background-color: rgba(255, 0, 0, 0.5);
+            background-color: #5a5ac4;
             transform: scale(1.05);
         }
         .overlay {
@@ -89,7 +89,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.5);
             display: none;
             align-items: center;
             justify-content: center;
@@ -116,19 +116,9 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
     <div class="navbar">
         Math Help - Activities
     </div>
@@ -155,7 +145,6 @@
             <p>Angelikah - helped give out ideas onto the website, and helped given links for more games to the website much respect.</p>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         document.getElementById('searchInput').addEventListener('input', function() {
             var filter = this.value.toUpperCase();
@@ -186,123 +175,6 @@
         function closeHelperWindow() {
             document.getElementById('helperOverlay').style.display = 'none';
         }
-
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 80,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#ffffff"
-                },
-                "shape": {
-                    "type": "circle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    },
-                    "polygon": {
-                        "nb_sides": 5
-                    },
-                    "image": {
-                        "src": "img/github.svg",
-                        "width": 100,
-                        "height": 100
-                    }
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": false,
-                    "anim": {
-                        "enable": false,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                
-                    "anim": {
-                        "enable": false,
-                        "speed": 40,
-                        "size_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#ffffff",
-                    "opacity": 0.4,
-                    "[_{{{CITATION{{{_1{](https://github.com/YeshPatel23/HomePage/tree/2f12aa2aebaf030ce031b23404c2adebbb1ade58/assets%2Fjs%2FBold-BS4-Jumbotron-with-Particles-js.js)[_{{{CITATION{{{_2{](https://github.com/aksisoftsby/demowebaksisoft/tree/b905275adf26fc4375e5256a0c142eacbe874621/furni%2Farchi%2Fjs%2Fparticles-settings.js)[_{{{CITATION{{{_3{](https://github.com/DigitalExpert-IT/crazy-rich/tree/bdbc8409387966ca2421e29c538388a15baefe2e/admin%2Fassets%2Fplugins%2Fparticles%2Fparticlesapp_default_dots.js)[_{{{CITATION{{{_4{](https://github.com/wermil/yii2/tree/d9ebc5a7e660266e349b035965ecaaa61acdc7e6/web%2Fjs%2Fparticles.js)
-                                        },
-                "distance": 150,
-                "color": "#ffffff",
-                "opacity": 0.4,
-                "width": 1
-            },
-            "move": {
-                "enable": true,
-                "speed": 6,
-                "direction": "none",
-                "random": false,
-                "straight": false,
-                "out_mode": "out",
-                "bounce": false,
-                "attract": {
-                    "enable": false,
-                    "rotateX": 600,
-                    "rotateY": 1200
-                }
-            }
-        },
-        "interactivity": {
-            "detect_on": "canvas",
-            "events": {
-                "onhover": {
-                    "enable": true,
-                    "mode": "repulse"
-                },
-                "onclick": {
-                    "enable": true,
-                    "mode": "push"
-                },
-                "resize": true
-            },
-            "modes": {
-                "grab": {
-                    "distance": 400,
-                    "line_linked": {
-                        "opacity": 1
-                    }
-                },
-                "bubble": {
-                    "distance": 400,
-                    "size": 40,
-                    "duration": 2,
-                    "opacity": 8,
-                    "speed": 3
-                },
-                "repulse": {
-                    "distance": 200,
-                    "duration": 0.4
-                },
-                "push": {
-                    "particles_nb": 4
-                },
-                "remove": {
-                    "particles_nb": 2
-                }
-            }
-        },
-        "retina_detect": true
-    });
     </script>
 </body>
 </html>
