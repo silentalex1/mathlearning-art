@@ -41,7 +41,7 @@
             color: #eee;
             margin-right: 10px;
         }
-        .feedback-button, .open-blink-button, .helper-button {
+        .feedback-button, .open-blink-button, .helper-button, .changelog-button {
             padding: 10px 20px;
             font-size: 16px;
             background-color: #555;
@@ -52,7 +52,7 @@
             transition: background-color 0.3s, transform 0.3s;
             margin-left: 20px;
         }
-        .feedback-button:hover, .open-blink-button:hover, .helper-button:hover {
+        .feedback-button:hover, .open-blink-button:hover, .helper-button:hover, .changelog-button:hover {
             background-color: #777;
             transform: scale(1.05);
         }
@@ -120,6 +120,7 @@
         <button class="feedback-button" onclick="location.href='/feedback'">Feedback</button>
         <button class="open-blink-button" onclick="clickHandler('https://mathlearning.art/activity.html')">Open in about:blink</button>
         <button class="helper-button" onclick="openHelperWindow()">The wall of helpers</button>
+        <button class="changelog-button" onclick="openChangelogWindow()">Changelogs - Updates</button>
     </div>
     <div class="buttons-container" id="buttonsContainer">
         <button class="button" onclick="location.href='/1v1lol'">1v1.lol</button>
@@ -136,6 +137,18 @@
             <button class="close-button" onclick="closeHelperWindow()">X</button>
             <h2>The Helpers</h2>
             <p>Angelikah - helped give out ideas onto the website, and helped given links for more games to the website much respect.</p>
+        </div>
+    </div>
+    <div class="overlay" id="changelogOverlay">
+        <div class="overlay-content">
+            <button class="close-button" onclick="closeChangelogWindow()">X</button>
+            <h2>Updates</h2>
+            <ul>
+                <li>added minecraft link</li>
+                <li>added the wall of helpers</li>
+            </ul>
+            <h2>What's Going to be Added/Updated Soon</h2>
+            <p>The about:blink will be added soon, the go back button in the games page will be fixed soon, 1v1.lol and Retro Bowl will be added soon and a new link of Drift Boss will also be added soon.</p>
         </div>
     </div>
     <script>
@@ -167,6 +180,14 @@
 
         function closeHelperWindow() {
             document.getElementById('helperOverlay').style.display = 'none';
+        }
+
+        function openChangelogWindow() {
+            document.getElementById('changelogOverlay').style.display = 'flex';
+        }
+
+        function closeChangelogWindow() {
+            document.getElementById('changelogOverlay').style.display = 'none';
         }
     </script>
 </body>
