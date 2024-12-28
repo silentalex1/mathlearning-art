@@ -171,6 +171,7 @@
             } else if (key === "Backspace") {
                 display.value = display.value.slice(0, -1);
             } else if (key === "Escape" || key.toLowerCase() === "c") {
+                event.preventDefault(); 
                 clearDisplay();
             }
         });
