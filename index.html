@@ -15,33 +15,33 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #121212;
+            background-color: #f0f0f0;
             font-family: 'Helvetica Neue', Arial, sans-serif;
-            color: #e0e0e0;
+            color: #333;
         }
         .container {
             display: flex;
-            gap: 20px;
+            flex-direction: column;
             align-items: center;
+            gap: 20px;
         }
         #calculator {
-            width: 250px;
-            padding: 15px;
-            background: #1f1f1f;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            width: 300px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         #display {
             width: 100%;
-            height: 50px;
-            background: #333;
+            height: 60px;
+            background: #e0e0e0;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             text-align: right;
             padding: 15px;
-            color: #fff;
-            font-size: 22px;
-            margin-bottom: 15px;
+            font-size: 24px;
+            margin-bottom: 20px;
             outline: none;
         }
         .button-container {
@@ -51,28 +51,28 @@
         }
         .button {
             width: 22%;
-            height: 50px;
+            height: 60px;
             margin: 2%;
-            font-size: 18px;
-            color: #e0e0e0;
-            background: #3a3a3a;
+            font-size: 20px;
+            color: #fff;
+            background: #3498db;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             transition: background 0.3s, transform 0.2s;
         }
         .button:hover {
-            background: #555;
+            background: #2980b9;
             transform: translateY(-2px);
         }
         .button:active {
             transform: translateY(0);
         }
         .button.operator {
-            background: #f39c12;
+            background: #e67e22;
         }
         .button.operator:hover {
-            background: #e67e22;
+            background: #d35400;
         }
         .button.equals {
             background: #2ecc71;
@@ -90,13 +90,13 @@
             background: #c0392b;
         }
         #result {
-            width: 200px;
-            min-height: 50px;
-            background: #222;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            font-size: 18px;
+            width: 250px;
+            min-height: 60px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            font-size: 20px;
             text-align: right;
         }
     </style>
@@ -125,7 +125,7 @@
                 <button class="button" onclick="appendToDisplay('.')">.</button>
             </div>
         </div>
-        <div id="result">Result: </div>
+        <div id="result">Result:</div>
     </div>
     <script>
         const display = document.getElementById("display");
