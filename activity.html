@@ -6,9 +6,9 @@
     <title>Math Help - Activities</title>
     <style>
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #2c2c2c;
-            color: #eee;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1e1e1e;
+            color: #fff;
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,65 +17,60 @@
         }
         .navbar {
             width: 100%;
-            background-color: #000;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
             padding: 1em;
             text-align: center;
             font-size: 28px;
             font-weight: bold;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .search-container {
             margin: 20px;
-            width: 80%;
+            width: 90%;
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 10px;
         }
         .search-bar {
             width: 100%;
             max-width: 400px;
-            padding: 10px;
+            padding: 12px;
             font-size: 18px;
-            border: 2px solid #555;
-            border-radius: 5px;
-            background-color: #444;
-            color: #eee;
-            margin-right: 10px;
+            border: 2px solid #ff758c;
+            border-radius: 25px;
+            background-color: #2c2c2c;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
         }
-        .feedback-button, .open-blink-button, .helper-button, .changelog-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #555;
-            color: #eee;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            margin-left: 20px;
-        }
-        .feedback-button:hover, .open-blink-button:hover, .helper-button:hover, .changelog-button:hover {
-            background-color: #777;
-            transform: scale(1.05);
+        .search-bar:focus {
+            border-color: #ff7eb3;
         }
         .buttons-container {
-            width: 80%;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            width: 90%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
         }
-        .button {
-            padding: 15px 25px;
+        .button, .feedback-button, .helper-button, .changelog-button {
+            padding: 15px;
             font-size: 16px;
-            background-color: #555;
-            color: #eee;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
-        .button:hover {
-            background-color: #777;
+        .button:hover, .feedback-button:hover, .helper-button:hover, .changelog-button:hover {
             transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
         }
         .overlay {
             position: fixed;
@@ -83,43 +78,37 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 2147483647;
+            z-index: 1000;
         }
         .overlay-content {
-            background-color: #333;
+            background-color: #2c2c2c;
             padding: 20px;
             border-radius: 10px;
-            position: relative;
             max-width: 500px;
-            width: 100%;
-            color: #eee;
+            width: 90%;
+            color: #fff;
+            text-align: center;
         }
-        .overlay-content .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #555;
+        .close-button {
+            background-color: #ff7eb3;
             border: none;
-            padding: 5px;
-            color: #eee;
+            padding: 10px;
+            color: white;
             border-radius: 5px;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        Math Help - Activities
-    </div>
+    <div class="navbar">Math Help - Activities</div>
     <div class="search-container">
-        <input type="text" class="search-bar" id="searchInput" placeholder="search for activities">
+        <input type="text" class="search-bar" id="searchInput" placeholder="Search for activities...">
         <button class="feedback-button" onclick="location.href='/feedback'">Feedback</button>
-        <button class="open-blink-button" onclick="clickHandler('https://mathlearning.art/activity.html')">Open in about:blink</button>
-        <button class="helper-button" onclick="openHelperWindow()">The wall of helpers</button>
+        <button class="helper-button" onclick="openHelperWindow()">Wall of Helpers</button>
         <button class="changelog-button" onclick="openChangelogWindow()">Changelogs - Updates</button>
     </div>
     <div class="buttons-container" id="buttonsContainer">
@@ -129,14 +118,13 @@
         <button class="button" onclick="location.href='/shellshocker'">Shell Shockers</button>
         <button class="button" onclick="location.href='/Roblox'">Roblox</button>
         <button class="button" onclick="location.href='/driftboss'">Drift Boss</button>
-        <!-- New "Slope" button -->
         <button class="button" onclick="location.href='/slope'">Slope</button>
     </div>
     <div class="overlay" id="helperOverlay">
         <div class="overlay-content">
             <button class="close-button" onclick="closeHelperWindow()">X</button>
             <h2>The Helpers</h2>
-            <p>Angelikah - helped give out ideas onto the website, and helped given links for more games to the website much respect.</p>
+            <p>Angelikah - helped with ideas and game links. Much respect.</p>
         </div>
     </div>
     <div class="overlay" id="changelogOverlay">
@@ -144,51 +132,16 @@
             <button class="close-button" onclick="closeChangelogWindow()">X</button>
             <h2>Updates</h2>
             <ul>
-                <li>added minecraft link</li>
-                <li>added the wall of helpers</li>
+                <li>Added Minecraft link</li>
+                <li>Added the Wall of Helpers</li>
             </ul>
-            <h2>What's Going to be Added/Updated Soon</h2>
-            <p>The about:blink will be added soon, the go back button in the games page will be fixed soon, 1v1.lol and Retro Bowl will be added soon and a new link of Drift Boss will also be added soon.</p>
         </div>
     </div>
     <script>
-        document.getElementById('searchInput').addEventListener('input', function() {
-            var filter = this.value.toUpperCase();
-            var buttons = document.getElementById('buttonsContainer').getElementsByTagName('button');
-            for (var i = 0; i < buttons.length; i++) {
-                var button = buttons[i];
-                var text = button.textContent || button.innerText;
-                if (text.toUpperCase().indexOf(filter) > -1) {
-                    button.style.display = "";
-                } else {
-                    button.style.display = "none";
-                }
-            }
-        });
-
-        function clickHandler(url) {
-            var win = window.open();
-            var iframe = win.document.createElement('iframe');
-            iframe.style = "position:fixed;width:100vw;height:100vh;top:0px;left:0px;right:0px;bottom:0px;z-index:2147483647;background-color:white;border:none;";
-            iframe.src = url;
-            win.document.body.appendChild(iframe);
-        }
-
-        function openHelperWindow() {
-            document.getElementById('helperOverlay').style.display = 'flex';
-        }
-
-        function closeHelperWindow() {
-            document.getElementById('helperOverlay').style.display = 'none';
-        }
-
-        function openChangelogWindow() {
-            document.getElementById('changelogOverlay').style.display = 'flex';
-        }
-
-        function closeChangelogWindow() {
-            document.getElementById('changelogOverlay').style.display = 'none';
-        }
+        function openHelperWindow() { document.getElementById('helperOverlay').style.display = 'flex'; }
+        function closeHelperWindow() { document.getElementById('helperOverlay').style.display = 'none'; }
+        function openChangelogWindow() { document.getElementById('changelogOverlay').style.display = 'flex'; }
+        function closeChangelogWindow() { document.getElementById('changelogOverlay').style.display = 'none'; }
     </script>
 </body>
 </html>
