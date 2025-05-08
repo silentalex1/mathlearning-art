@@ -1,1 +1,149 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Help - Activities</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1e1e1e;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .navbar {
+            width: 100%;
+            background-color: #000;
+            padding: 1em;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .search-container {
+            margin: 20px;
+            width: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-bar {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            font-size: 18px;
+            border: 2px solid #555;
+            border-radius: 25px;
+            background-color: #2c2c2c;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .search-bar:focus {
+            border-color: #777;
+        }
+        .buttons-container {
+            width: 90%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .button, .feedback-button, .helper-button, .changelog-button {
+            padding: 15px;
+            font-size: 16px;
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .button:hover, .feedback-button:hover, .helper-button:hover, .changelog-button:hover {
+            background-color: #777;
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .overlay-content {
+            background-color: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            color: #fff;
+            text-align: center;
+        }
+        .close-button {
+            background-color: #777;
+            border: none;
+            padding: 10px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">Math Help - Activities</div>
+    <div class="search-container">
+        <input type="text" class="search-bar" id="searchInput" placeholder="Search for activities...">
+        <button class="feedback-button" onclick="location.href='/feedback'">Feedback</button>
+        <button class="helper-button" onclick="openHelperWindow()">Wall of Helpers</button>
+        <button class="changelog-button" onclick="openChangelogWindow()">Changelogs - Updates</button>
+    </div>
+    <div class="buttons-container" id="buttonsContainer">
+        <button class="button" onclick="location.href='/1v1lol'">1v1.lol</button>
+        <button class="button" onclick="location.href='/MC'">MC</button>
+        <button class="button" onclick="location.href='/RetroBowl'">Retro Bowl</button>
+        <button class="button" onclick="location.href='/shellshocker'">Shell Shockers</button>
+        <button class="button" onclick="location.href='/Roblox'">Roblox</button>
+        <button class="button" onclick="location.href='/driftboss'">Drift Boss</button>
+        <button class="button" onclick="location.href='/slope'">Slope</button>
+    </div>
+    <div class="overlay" id="helperOverlay">
+        <div class="overlay-content">
+            <button class="close-button" onclick="closeHelperWindow()">X</button>
+            <h2>The Helpers</h2>
+            <p>Angelikah - helped with ideas and game links. Much respect.</p>
+        </div>
+    </div>
+    <div class="overlay" id="changelogOverlay">
+        <div class="overlay-content">
+            <button class="close-button" onclick="closeChangelogWindow()">X</button>
+            <h2>Updates</h2>
+            <ul>
+                <li>Added Minecraft link</li>
+                <li>Added the Wall of Helpers</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function openHelperWindow() { document.getElementById('helperOverlay').style.display = 'flex'; }
+        function closeHelperWindow() { document.getElementById('helperOverlay').style.display = 'none'; }
+        function openChangelogWindow() { document.getElementById('changelogOverlay').style.display = 'flex'; }
+        function closeChangelogWindow() { document.getElementById('changelogOverlay').style.display = 'none'; }
+    </script>
+</body>
+</html>
