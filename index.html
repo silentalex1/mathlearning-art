@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GimGenius</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-design"></div>
+    <button class="admin-panel-btn" onclick="openAdminModal()">Go to admin panel</button>
+    <div class="admin-modal" id="adminModal">
+        <div class="admin-modal-content">
+            <span class="close-modal" onclick="closeAdminModal()">&times;</span>
+            <h2>Enter admin password.</h2>
+            <div class="input-group">
+                <input type="text" id="modalAdminUsername" placeholder="Enter admin username">
+            </div>
+            <div class="input-group">
+                <input type="password" id="modalAdminCode" placeholder="Enter admin code.">
+            </div>
+            <button class="modal-login-btn" onclick="modalAdminLogin()">Login</button>
+        </div>
+    </div>
+    <div class="calculator-container">
+        <div class="calculator">
+            <div class="display">
+                <input type="text" id="display">
+            </div>
+            <div class="buttons">
+                <button onclick="clearDisplay()">C</button>
+                <button onclick="deleteLast()">⌫</button>
+                <button onclick="appendToDisplay('/')">/</button>
+                <button onclick="appendToDisplay('*')">×</button>
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button onclick="appendToDisplay('-')">-</button>
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button onclick="appendToDisplay('+')">+</button>
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button onclick="calculate()" class="equals">=</button>
+                <button onclick="appendToDisplay('0')" class="zero">0</button>
+                <button onclick="appendToDisplay('.')">.</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const display = document.getElementById('display');
+        let currentInput = '';
+        let adminModalOpen = false;
+        function appendToDisplay(value) {
+            if (adminModalOpen) return;
+            currentInput += value;
+            display.value = currentInput;
+            if (currentInput === '44') {
+                setTimeout(() => {
+                    window.location.href = '/activity';
+                }, 500);
+            }
+        }
+        function clearDisplay() {
+            if (adminModalOpen) return;
+            currentInput = '';
+            display.value = '';
+        }
+        function deleteLast() {
+            if (adminModalOpen) return;
+            currentInput = currentInput.slice(0, -1);
+            display.value = currentInput;
+        }
+        function calculate() {
+            if (adminModalOpen) return;
+            try {
+                if (currentInput === '') {
+                    display.value = '';
+                    return;
+                }
+                let expr = currentInput.replace(/[^0-9+\-*/().]/g, '');
+                if (/[^0-9+\-*/().]/.test(expr)) {
+                    display.value = 'Error';
+                    currentInput = '';
+                    return;
+                }
+                let result = Function('return (' + expr + ')')();
+                if (isFinite(result)) {
+                    if (Number.isInteger(result)) {
+                        currentInput = result.toString();
+                    } else {
+                        currentInput = parseFloat(result.toFixed(8)).toString();
+                    }
+                    display.value = currentInput;
+                } else {
+                    display.value = 'Error';
+                    currentInput = '';
+                }
+            } catch (error) {
+                display.value = 'Error';
+                currentInput = '';
+            }
+        }
+        document.addEventListener('keydown', (e) => {
+            if (adminModalOpen) return;
+            if (e.key >= '0' && e.key <= '9' || e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/' || e.key === '.' || e.key === '(' || e.key === ')') {
+                appendToDisplay(e.key);
+            } else if (e.key === 'Enter') {
+                calculate();
+            } else if (e.key === 'Backspace') {
+                deleteLast();
+            } else if (e.key === 'Escape' || e.key === 'c' || e.key === 'C') {
+                clearDisplay();
+            }
+        });
+        document.addEventListener('paste', (e) => {
+            if (adminModalOpen) return;
+            e.preventDefault();
+            const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+            const cleanText = pastedText.replace(/[^0-9+\-*/().]/g, '');
+            if (cleanText) {
+                currentInput = cleanText;
+                display.value = currentInput;
+                if (currentInput === '44') {
+                    setTimeout(() => {
+                        window.location.href = '/activity';
+                    }, 500);
+                }
+            }
+        });
+        display.addEventListener('input', (e) => {
+            if (adminModalOpen) return;
+            const value = e.target.value;
+            const cleanValue = value.replace(/[^0-9+\-*/().]/g, '');
+            currentInput = cleanValue;
+            display.value = cleanValue;
+            if (currentInput === '44') {
+                setTimeout(() => {
+                    window.location.href = '/activity';
+                }, 500);
+            }
+        });
+        function openAdminModal() {
+            adminModalOpen = true;
+            document.getElementById('adminModal').style.display = 'flex';
+        }
+        function closeAdminModal() {
+            adminModalOpen = false;
+            document.getElementById('adminModal').style.display = 'none';
+        }
+        async function modalAdminLogin() {
+            const username = document.getElementById('modalAdminUsername').value;
+            const code = document.getElementById('modalAdminCode').value;
+            if (!username || !code) return;
+            const response = await fetch('/api/admin-login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, code })
+            });
+            const data = await response.json();
+            if (data.success) {
+                window.location.href = '/admin-dashboard';
+            } else {
+                closeAdminModal();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1e3a8a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.notification {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 400px;
+    text-align: center;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+}
+
+.container {
+    perspective: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+.flip-container {
+    width: 400px;
+    height: 500px;
+}
+
+.flipper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.login-form, .create-form {
+    width: 100%;
+    padding: 40px;
+    text-align: center;
+}
+
+h2 {
+    color: #00d4ff;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 10px;
+    padding: 0 20px;
+    font-size: 1.1em;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.input-group input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.3);
+}
+
+.input-group input::placeholder {
+    color: #999;
+}
+
+.login-btn, .create-btn, .back-btn {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.login-btn {
+    background: #00d4ff;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+}
+
+.login-btn:hover {
+    background: #00b8e6;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+}
+
+.create-btn {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.create-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.back-btn {
+    background: rgba(255, 107, 107, 0.9);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.back-btn:hover {
+    background: rgba(255, 107, 107, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+.login-btn:active, .create-btn:active, .back-btn:active {
+    transform: translateY(0);
+} 

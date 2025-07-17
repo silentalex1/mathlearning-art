@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.background-design {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%);
+    overflow: hidden;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+.admin-panel-btn {
+    position: fixed;
+    top: 30px;
+    right: 40px;
+    z-index: 10;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    transition: all 0.3s;
+}
+.admin-panel-btn:hover {
+    background: linear-gradient(135deg, #ee5a52, #ff6b6b);
+    transform: translateY(-2px);
+}
+
+.admin-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(30, 58, 138, 0.7);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+.admin-modal-content {
+    background: rgba(255,255,255,0.95);
+    border-radius: 18px;
+    padding: 40px 32px 32px 32px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    min-width: 340px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-modal-content h2 {
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.admin-modal-content .input-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.admin-modal-content .input-group input {
+    width: 100%;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 10px;
+    padding: 0 20px;
+    font-size: 1.1em;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.admin-modal-content .input-group input:focus {
+    outline: none;
+    border-color: #00d4ff;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+}
+
+.admin-modal-content .input-group input::placeholder {
+    color: #999;
+}
+.close-modal {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    font-size: 1.5em;
+    color: #ff6b6b;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+.close-modal:hover {
+    color: #d32f2f;
+}
+.modal-login-btn {
+    width: 100%;
+    height: 45px;
+    background: linear-gradient(135deg, #00d4ff, #00b8e6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 18px;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+.modal-login-btn:hover {
+    background: linear-gradient(135deg, #00b8e6, #00d4ff);
+    transform: translateY(-2px);
+}
+
+.calculator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    z-index: 2;
+    position: relative;
+}
+
+.calculator {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 350px;
+}
+
+.display {
+    margin-bottom: 20px;
+}
+
+.display input {
+    width: 100%;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 15px;
+    font-size: 2.5em;
+    text-align: right;
+    padding: 0 20px;
+    color: #333;
+    box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.buttons button {
+    height: 70px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.5em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 1);
+}
+
+.buttons button:active {
+    transform: translateY(0);
+}
+
+.buttons button.equals {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    grid-row: span 2;
+}
+
+.buttons button.zero {
+    grid-column: span 2;
+}
+
+.buttons button:nth-child(1),
+.buttons button:nth-child(2) {
+    background: rgba(255, 107, 107, 0.9);
+    color: white;
+}
+
+.buttons button:nth-child(3),
+.buttons button:nth-child(4) {
+    background: rgba(255, 193, 7, 0.9);
+    color: white;
+} 
