@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GimGenius - Admin Panel</title>
+    <link rel="stylesheet" href="adminpanel.css">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-form">
+            <h2>ADMIN PANEL</h2>
+            <div class="input-group">
+                <input type="text" id="adminUsername" placeholder="Admin Username">
+            </div>
+            <div class="input-group">
+                <input type="password" id="adminCode" placeholder="Your Admin Code">
+            </div>
+            <button onclick="adminLogin()" class="admin-btn">Access Admin</button>
+        </div>
+    </div>
+
+    <script>
+        async function adminLogin() {
+            const username = document.getElementById('adminUsername').value;
+            const code = document.getElementById('adminCode').value;
+            
+            if (!username || !code) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/admin-login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, code })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    window.location.href = '/admin-dashboard';
+                } else {
+                    alert(data.message || 'Invalid admin credentials');
+                }
+            } catch (error) {
+                alert('Error during login');
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                adminLogin();
+            }
+        });
+    </script>
+</body>
+</html>

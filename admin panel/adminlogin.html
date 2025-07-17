@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GimGenius - Admin Dashboard</title>
+    <link rel="stylesheet" href="admindashboard.css">
+</head>
+<body>
+    <div class="admin-dashboard">
+        <div class="header">
+            <h1>Admin Dashboard</h1>
+            <div class="header-controls">
+                <div class="bot-status" id="botStatus">
+                    <span class="status-indicator" id="statusIndicator"></span>
+                    <span class="status-text" id="statusText">Bot Offline</span>
+                </div>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+        </div>
+        
+        <div class="dashboard-content">
+            <div class="left-panel">
+                <div class="code-generation">
+                    <h2>Generate Access Code</h2>
+                    <div class="input-group">
+                        <input type="text" id="usernameForCode" placeholder="Enter username for the access code">
+                    </div>
+                    <button onclick="generateCode()" class="submit-btn">Submit</button>
+                    
+                    <div class="code-display" id="codeDisplay">
+                        <span id="generatedCode"></span>
+                    </div>
+                </div>
+                
+                <div class="change-code">
+                    <h2>Change User Access Code</h2>
+                    <div class="input-group">
+                        <input type="text" id="changeUsername" placeholder="Enter username">
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="newAccessCode" placeholder="Enter new access code">
+                    </div>
+                    <button onclick="changeCode()" class="submit-btn">Update Code</button>
+                </div>
+
+
+            </div>
+            
+            <div class="right-panel">
+                <div class="active-users">
+                    <h2>Active Users</h2>
+                    <div class="users-list" id="usersList">
+                        <div class="loading">Loading users...</div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadUsers() {
+            try {
+                const response = await fetch('/api/users');
+                const users = await response.json();
+                
+                const usersList = document.getElementById('usersList');
+                
+                if (users.length === 0) {
+                    usersList.innerHTML = '<div class="no-users">No active users found</div>';
+                    return;
+                }
+                
+                usersList.innerHTML = users.map(user => `
+                    <div class="user-item">
+                        <div class="user-info">
+                            <span class="username">${user.username}</span>
+                            <span class="access-code">${user.accessCode}</span>
+                        </div>
+                        <div class="user-actions">
+                            <button onclick="removeUserCode('${user.username}')" class="action-btn remove-code-btn">Remove Code</button>
+                            <button onclick="removeUser('${user.username}')" class="action-btn remove-user-btn">Remove User</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading users:', error);
+            }
+        }
+
+        async function generateCode() {
+            const username = document.getElementById('usernameForCode').value;
+            
+            if (!username) {
+                alert('Please enter a username');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/generate-code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('generatedCode').textContent = `Generated Code: ${data.accessCode}`;
+                    document.getElementById('codeDisplay').style.display = 'block';
+                    document.getElementById('usernameForCode').value = '';
+                    loadUsers();
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                alert('Error generating code');
+            }
+        }
+
+        async function changeCode() {
+            const username = document.getElementById('changeUsername').value;
+            const newCode = document.getElementById('newAccessCode').value;
+            
+            if (!username || !newCode) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/change-code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, newCode })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('Access code updated successfully');
+                    document.getElementById('changeUsername').value = '';
+                    document.getElementById('newAccessCode').value = '';
+                    loadUsers();
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                alert('Error updating code');
+            }
+        }
+
+        async function startBot() {
+            const token = document.getElementById('botToken').value;
+            if (!token) {
+                alert('Please enter a bot token first');
+                return;
+            }
+            
+            if (!botRunning) {
+                try {
+                    const response = await fetch('/api/start-bot', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ token })
+                    });
+                    
+                    const data = await response.json();
+                    if (data.success) {
+                        botRunning = true;
+                        updateBotStatus(true);
+                        addLog('Discord bot started successfully');
+                    } else {
+                        addLog('Failed to start bot: ' + data.message);
+                    }
+                } catch (error) {
+                    addLog('Error starting bot');
+                }
+            }
+        }
+
+        async function stopBot() {
+            if (botRunning) {
+                try {
+                    const response = await fetch('/api/stop-bot', {
+                        method: 'POST'
+                    });
+                    
+                    const data = await response.json();
+                    if (data.success) {
+                        botRunning = false;
+                        updateBotStatus(false);
+                        addLog('Discord bot stopped');
+                    }
+                } catch (error) {
+                    addLog('Error stopping bot');
+                }
+            }
+        }
+
+        async function restartBot() {
+            await stopBot();
+            setTimeout(async () => {
+                await startBot();
+                addLog('Discord bot restarted');
+            }, 1000);
+        }
+
+        function updateBotStatus(running) {
+            const indicator = document.getElementById('statusIndicator');
+            const statusText = document.getElementById('statusText');
+            
+            if (running) {
+                indicator.className = 'status-indicator online';
+                statusText.textContent = 'Bot Online';
+            } else {
+                indicator.className = 'status-indicator offline';
+                statusText.textContent = 'Bot Offline';
+            }
+        }
+
+        function addLog(message) {
+            const logsContainer = document.getElementById('logsContainer');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            logsContainer.appendChild(logEntry);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        }
+
+        async function removeUserCode(username) {
+            if (confirm(`Remove access code for user "${username}"?`)) {
+                try {
+                    const response = await fetch('/api/remove-code', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ username })
+                    });
+                    
+                    const data = await response.json();
+                    if (data.success) {
+                                            loadUsers();
+                    } else {
+                        alert(data.message);
+                    }
+                } catch (error) {
+                    alert('Error removing code');
+                }
+            }
+        }
+
+        async function removeUser(username) {
+            if (confirm(`Remove user "${username}" completely?`)) {
+                try {
+                    const response = await fetch('/api/remove-user', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ username })
+                    });
+                    
+                    const data = await response.json();
+                    if (data.success) {
+                                            loadUsers();
+                    } else {
+                        alert(data.message);
+                    }
+                } catch (error) {
+                    alert('Error removing user');
+                }
+            }
+        }
+
+        function clearLogs() {
+            const logsContainer = document.getElementById('logsContainer');
+            logsContainer.innerHTML = '<div class="log-entry">Logs cleared...</div>';
+        }
+
+        function logout() {
+            window.location.href = '/adminpanel';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUsers();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                if (document.activeElement.id === 'usernameForCode') {
+                    generateCode();
+                } else if (document.activeElement.id === 'newAccessCode') {
+                    changeCode();
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
